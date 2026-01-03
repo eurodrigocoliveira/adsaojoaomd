@@ -16,6 +16,9 @@
         Edite, replique e compartilhe a ordem do culto com a igreja.
       </p>
       <div class="hero__badges">
+        <span class="badge" id="badge-date">📅 14/12/2025</span>
+        <span class="badge" id="badge-time">🕰️ 18:00</span>
+        <span class="badge badge--soft" id="badge-type">Próximo culto celebração</span>
         <span class="badge">📅 14/12/2025</span>
         <span class="badge">🕰️ 18:00</span>
         <span class="badge badge--soft">Próximo culto celebração</span>
@@ -24,6 +27,11 @@
     <div class="hero__panel">
       <div class="panel__title">Resumo rápido</div>
       <ul class="panel__list">
+        <li><strong>Conjunto:</strong> <span id="resumo-conjunto">Abraão e Banda</span></li>
+        <li><strong>Mídia:</strong> <span id="resumo-midia">Stories — Thaís</span></li>
+        <li><strong>Recepção:</strong> <span id="resumo-recepcao">Jairo ✨ Mara</span></li>
+        <li><strong>Pastor:</strong> <span id="resumo-pastor">Pr. Rodrigo</span></li>
+        <li><strong>Palavra:</strong> <span id="resumo-palavra">Pb. Evandro</span></li>
         <li><strong>Conjunto:</strong> Abraão e Banda</li>
         <li><strong>Mídia:</strong> Stories — Thaís</li>
         <li><strong>Recepção:</strong> Jairo e Mara</li>
@@ -35,6 +43,72 @@
   </header>
 
   <main class="container">
+    <section class="section form-section">
+      <div>
+        <p class="eyebrow">Configurar culto</p>
+        <h2>Editar informações do culto</h2>
+        <p class="section__subtitle">Atualize data, hora e responsáveis para reutilizar a escala.</p>
+      </div>
+      <form id="culto-form" class="card form-card">
+        <div class="form-grid">
+          <label>
+            Data
+            <input type="date" id="campo-data" required>
+          </label>
+          <label>
+            Horário
+            <input type="time" id="campo-hora" required>
+          </label>
+          <label>
+            Local
+            <input type="text" id="campo-local" placeholder="Templo Central" required>
+          </label>
+          <label>
+            Tipo de culto
+            <input type="text" id="campo-tipo" placeholder="Culto celebração">
+          </label>
+          <label>
+            Conjunto / Louvor
+            <input type="text" id="campo-conjunto" placeholder="Equipe de louvor" required>
+          </label>
+          <label>
+            Mídia
+            <input type="text" id="campo-midia" placeholder="Stories — Nome">
+          </label>
+          <label>
+            Recepção
+            <input type="text" id="campo-recepcao" placeholder="Responsáveis pela recepção">
+          </label>
+          <label>
+            Pastor responsável
+            <input type="text" id="campo-pastor" placeholder="Pr. Fulano">
+          </label>
+          <label>
+            Mensagem / Palavra
+            <input type="text" id="campo-palavra" placeholder="Pb. Fulano">
+          </label>
+        </div>
+        <div class="form__actions">
+          <div class="pill-note">As alterações atualizam cartões, resumo e texto copiado.</div>
+          <button type="submit" class="primary-button">Aplicar mudanças</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="cards-grid" aria-label="Informações principais">
+      <article class="card highlight">
+        <div class="card__eyebrow">Data</div>
+        <h3 id="card-data">14 de dezembro de 2025</h3>
+        <p id="card-tipo">Domingo à noite — Culto de celebração.</p>
+      </article>
+      <article class="card">
+        <div class="card__eyebrow">Horário</div>
+        <h3 id="card-horario">18:00 · Preparação</h3>
+        <p id="card-horario-extra">Início oficial do louvor às 18:30.</p>
+      </article>
+      <article class="card">
+        <div class="card__eyebrow">Local</div>
+        <h3 id="card-local">Templo Central</h3>
     <section class="cards-grid" aria-label="Informações principais">
       <article class="card highlight">
         <div class="card__eyebrow">Data</div>
@@ -141,6 +215,25 @@
   </footer>
 
   <script>
+    const cultoInfo = {
+      data: "2025-12-14",
+      hora: "18:00",
+      local: "Templo Central",
+      tipo: "Culto celebração",
+      conjunto: "Abraão e Banda",
+      midia: "Stories — Thaís",
+      recepcao: "Jairo ✨ Mara",
+      pastor: "Pr. Rodrigo",
+      palavra: "Pb. Evandro",
+    };
+
+    const equipes = [
+      { key: "conjunto", titulo: "Conjunto", detalhes: "Medley com dois louvores iniciais.", cor: "accent" },
+      { key: "midia", titulo: "Mídia", detalhes: "Entradas ao vivo e story de chamada às 16:30.", cor: "neutral" },
+      { key: "recepcao", titulo: "Recepção", detalhes: "Recolher ofertas e acolhida dos visitantes.", cor: "neutral" },
+      { titulo: "Auxiliar", responsavel: "Gian", detalhes: "Palavra introdutória e oração de transição.", cor: "accent" },
+      { key: "palavra", titulo: "Ministração da Palavra", detalhes: "Com oração de cobertura do Pb. Vanderlei.", cor: "highlight" },
+      { key: "pastor", titulo: "Pastor Responsável", detalhes: "Apresentação de visitantes e encerramento.", cor: "highlight" },
     const equipes = [
       { titulo: "Conjunto", responsavel: "Abraão e Banda", detalhes: "Medley com dois louvores iniciais.", cor: "accent" },
       { titulo: "Mídia", responsavel: "Stories — Thaís", detalhes: "Entradas ao vivo e story de chamada às 16:30.", cor: "neutral" },
@@ -168,6 +261,75 @@
     const timelineEl = document.getElementById("timeline");
     const teamsEl = document.getElementById("teams");
 
+    const badgeDate = document.getElementById("badge-date");
+    const badgeTime = document.getElementById("badge-time");
+    const badgeType = document.getElementById("badge-type");
+    const resumoConjunto = document.getElementById("resumo-conjunto");
+    const resumoMidia = document.getElementById("resumo-midia");
+    const resumoRecepcao = document.getElementById("resumo-recepcao");
+    const resumoPastor = document.getElementById("resumo-pastor");
+    const resumoPalavra = document.getElementById("resumo-palavra");
+    const cardData = document.getElementById("card-data");
+    const cardTipo = document.getElementById("card-tipo");
+    const cardHorario = document.getElementById("card-horario");
+    const cardHorarioExtra = document.getElementById("card-horario-extra");
+    const cardLocal = document.getElementById("card-local");
+
+    const formData = document.getElementById("campo-data");
+    const formHora = document.getElementById("campo-hora");
+    const formLocal = document.getElementById("campo-local");
+    const formTipo = document.getElementById("campo-tipo");
+    const formConjunto = document.getElementById("campo-conjunto");
+    const formMidia = document.getElementById("campo-midia");
+    const formRecepcao = document.getElementById("campo-recepcao");
+    const formPastor = document.getElementById("campo-pastor");
+    const formPalavra = document.getElementById("campo-palavra");
+
+    function formatDateLong(isoDate) {
+      const data = new Date(isoDate + "T00:00:00");
+      return data.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
+    }
+
+    function formatDateShort(isoDate) {
+      const data = new Date(isoDate + "T00:00:00");
+      return data.toLocaleDateString("pt-BR");
+    }
+
+    function renderHeaderInfo() {
+      badgeDate.textContent = `📅 ${formatDateShort(cultoInfo.data)}`;
+      badgeTime.textContent = `🕰️ ${cultoInfo.hora}`;
+      badgeType.textContent = cultoInfo.tipo ? `Próximo ${cultoInfo.tipo}` : "Próximo culto";
+
+      resumoConjunto.textContent = cultoInfo.conjunto;
+      resumoMidia.textContent = cultoInfo.midia;
+      resumoRecepcao.textContent = cultoInfo.recepcao;
+      resumoPastor.textContent = cultoInfo.pastor;
+      resumoPalavra.textContent = cultoInfo.palavra;
+
+      cardData.textContent = formatDateLong(cultoInfo.data);
+      cardTipo.textContent = `${cultoInfo.tipo || "Culto"} — configure detalhes da liturgia.`;
+      cardHorario.textContent = `${cultoInfo.hora} · Preparação`;
+      cardHorarioExtra.textContent = "Início oficial do louvor 30 minutos depois do horário base.";
+      cardLocal.textContent = cultoInfo.local;
+
+      formData.value = cultoInfo.data;
+      formHora.value = cultoInfo.hora;
+      formLocal.value = cultoInfo.local;
+      formTipo.value = cultoInfo.tipo;
+      formConjunto.value = cultoInfo.conjunto;
+      formMidia.value = cultoInfo.midia;
+      formRecepcao.value = cultoInfo.recepcao;
+      formPastor.value = cultoInfo.pastor;
+      formPalavra.value = cultoInfo.palavra;
+    }
+
+    function equipeComResponsavel(item) {
+      if (!item.key) return item;
+      return { ...item, responsavel: cultoInfo[item.key] };
+    }
+
+    function renderTeams() {
+      teamsEl.innerHTML = equipes.map(equipeComResponsavel).map(team => `
     function renderTeams() {
       teamsEl.innerHTML = equipes.map(team => `
         <article class="card card--team card--${team.cor}">
@@ -175,6 +337,7 @@
             <span class="pill">${team.titulo}</span>
             <span class="emoji">👥</span>
           </div>
+          <h3>${team.responsavel || "A definir"}</h3>
           <h3>${team.responsavel}</h3>
           <p>${team.detalhes}</p>
         </article>
@@ -200,6 +363,11 @@
         if (item.responsavel) partes.push(`(${item.responsavel})`);
         if (item.detalhes) partes.push(`- ${item.detalhes}`);
         return partes.join(" ");
+      }).join("\n");
+
+      const titulo = `Escala ${formatDateShort(cultoInfo.data)} - ${cultoInfo.hora}`;
+
+      navigator.clipboard.writeText(`${titulo}\n${linhas}`)
       }).join("\\n");
 
       navigator.clipboard.writeText(`Escala 14/12/2025 - 18h\\n${linhas}`)
@@ -212,6 +380,7 @@
     }
 
     const ordem = [...ordemInicial];
+    renderHeaderInfo();
     renderTeams();
     renderTimeline(ordem);
 
@@ -232,6 +401,23 @@
       ordem.sort((a, b) => a.horario.localeCompare(b.horario));
       renderTimeline(ordem);
       event.target.reset();
+    });
+
+    document.getElementById("culto-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      cultoInfo.data = formData.value || cultoInfo.data;
+      cultoInfo.hora = formHora.value || cultoInfo.hora;
+      cultoInfo.local = formLocal.value || cultoInfo.local;
+      cultoInfo.tipo = formTipo.value || cultoInfo.tipo;
+      cultoInfo.conjunto = formConjunto.value || cultoInfo.conjunto;
+      cultoInfo.midia = formMidia.value || cultoInfo.midia;
+      cultoInfo.recepcao = formRecepcao.value || cultoInfo.recepcao;
+      cultoInfo.pastor = formPastor.value || cultoInfo.pastor;
+      cultoInfo.palavra = formPalavra.value || cultoInfo.palavra;
+
+      renderHeaderInfo();
+      renderTeams();
+      alert("Dados do culto atualizados!");
     });
   </script>
 </body>
