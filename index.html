@@ -19,6 +19,9 @@
         <span class="badge" id="badge-date">📅 14/12/2025</span>
         <span class="badge" id="badge-time">🕰️ 18:00</span>
         <span class="badge badge--soft" id="badge-type">Próximo culto celebração</span>
+        <span class="badge">📅 14/12/2025</span>
+        <span class="badge">🕰️ 18:00</span>
+        <span class="badge badge--soft">Próximo culto celebração</span>
       </div>
     </div>
     <div class="hero__panel">
@@ -29,6 +32,11 @@
         <li><strong>Recepção:</strong> <span id="resumo-recepcao">Jairo ✨ Mara</span></li>
         <li><strong>Pastor:</strong> <span id="resumo-pastor">Pr. Rodrigo</span></li>
         <li><strong>Palavra:</strong> <span id="resumo-palavra">Pb. Evandro</span></li>
+        <li><strong>Conjunto:</strong> Abraão e Banda</li>
+        <li><strong>Mídia:</strong> Stories — Thaís</li>
+        <li><strong>Recepção:</strong> Jairo e Mara</li>
+        <li><strong>Pastor:</strong> Pr. Rodrigo</li>
+        <li><strong>Palavra:</strong> Pb. Evandro</li>
       </ul>
       <button id="copy-escala-top" class="ghost-button">Copiar escala completa</button>
     </div>
@@ -101,6 +109,20 @@
       <article class="card">
         <div class="card__eyebrow">Local</div>
         <h3 id="card-local">Templo Central</h3>
+    <section class="cards-grid" aria-label="Informações principais">
+      <article class="card highlight">
+        <div class="card__eyebrow">Data</div>
+        <h3>14 de dezembro de 2025</h3>
+        <p>Domingo à noite — Culto de celebração.</p>
+      </article>
+      <article class="card">
+        <div class="card__eyebrow">Horário</div>
+        <h3>18:00 · Preparação</h3>
+        <p>Início oficial do louvor às 18:30.</p>
+      </article>
+      <article class="card">
+        <div class="card__eyebrow">Local</div>
+        <h3>Templo Central</h3>
         <p>Organize chegada das equipes até 30 minutos antes.</p>
       </article>
     </section>
@@ -212,6 +234,13 @@
       { titulo: "Auxiliar", responsavel: "Gian", detalhes: "Palavra introdutória e oração de transição.", cor: "accent" },
       { key: "palavra", titulo: "Ministração da Palavra", detalhes: "Com oração de cobertura do Pb. Vanderlei.", cor: "highlight" },
       { key: "pastor", titulo: "Pastor Responsável", detalhes: "Apresentação de visitantes e encerramento.", cor: "highlight" },
+    const equipes = [
+      { titulo: "Conjunto", responsavel: "Abraão e Banda", detalhes: "Medley com dois louvores iniciais.", cor: "accent" },
+      { titulo: "Mídia", responsavel: "Stories — Thaís", detalhes: "Entradas ao vivo e story de chamada às 16:30.", cor: "neutral" },
+      { titulo: "Recepção", responsavel: "Jairo ✨ Mara", detalhes: "Recolher ofertas e acolhida dos visitantes.", cor: "neutral" },
+      { titulo: "Auxiliar", responsavel: "Gian", detalhes: "Palavra introdutória e oração de transição.", cor: "accent" },
+      { titulo: "Ministração da Palavra", responsavel: "Pb. Evandro", detalhes: "Com oração de cobertura do Pb. Vanderlei.", cor: "highlight" },
+      { titulo: "Pastor Responsável", responsavel: "Pr. Rodrigo", detalhes: "Apresentação de visitantes e encerramento.", cor: "highlight" },
     ];
 
     const ordemInicial = [
@@ -301,12 +330,15 @@
 
     function renderTeams() {
       teamsEl.innerHTML = equipes.map(equipeComResponsavel).map(team => `
+    function renderTeams() {
+      teamsEl.innerHTML = equipes.map(team => `
         <article class="card card--team card--${team.cor}">
           <div class="card__header">
             <span class="pill">${team.titulo}</span>
             <span class="emoji">👥</span>
           </div>
           <h3>${team.responsavel || "A definir"}</h3>
+          <h3>${team.responsavel}</h3>
           <p>${team.detalhes}</p>
         </article>
       `).join("");
@@ -336,6 +368,9 @@
       const titulo = `Escala ${formatDateShort(cultoInfo.data)} - ${cultoInfo.hora}`;
 
       navigator.clipboard.writeText(`${titulo}\n${linhas}`)
+      }).join("\\n");
+
+      navigator.clipboard.writeText(`Escala 14/12/2025 - 18h\\n${linhas}`)
         .then(() => {
           alert("Escala copiada! Cole no WhatsApp ou e-mail da equipe.");
         })
