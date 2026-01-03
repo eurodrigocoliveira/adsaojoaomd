@@ -3,54 +3,236 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Instituto Haggai</title>
+  <title>Escala de Liturgia | Igreja</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Logo do Haggai Brasil">
+  <header class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">Planejamento do culto</p>
+      <h1>Escala de Liturgia</h1>
+      <p class="lede">
+        Centralize equipes, horários e responsabilidades em um só lugar.
+        Edite, replique e compartilhe a ordem do culto com a igreja.
+      </p>
+      <div class="hero__badges">
+        <span class="badge">📅 14/12/2025</span>
+        <span class="badge">🕰️ 18:00</span>
+        <span class="badge badge--soft">Próximo culto celebração</span>
+      </div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#cursos">Cursos</a></li>
-        <li><a href="#videos">Vídeos</a></li>
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#doar">Doar</a></li>
-        <li><a href="#acessar">Acessar</a></li>
+    <div class="hero__panel">
+      <div class="panel__title">Resumo rápido</div>
+      <ul class="panel__list">
+        <li><strong>Conjunto:</strong> Abraão e Banda</li>
+        <li><strong>Mídia:</strong> Stories — Thaís</li>
+        <li><strong>Recepção:</strong> Jairo e Mara</li>
+        <li><strong>Pastor:</strong> Pr. Rodrigo</li>
+        <li><strong>Palavra:</strong> Pb. Evandro</li>
       </ul>
-    </nav>
+      <button id="copy-escala-top" class="ghost-button">Copiar escala completa</button>
+    </div>
   </header>
 
-  <main>
-    <section id="cursos">
-      <h2>Cursos</h2>
-      <!-- Lista de cursos -->
+  <main class="container">
+    <section class="cards-grid" aria-label="Informações principais">
+      <article class="card highlight">
+        <div class="card__eyebrow">Data</div>
+        <h3>14 de dezembro de 2025</h3>
+        <p>Domingo à noite — Culto de celebração.</p>
+      </article>
+      <article class="card">
+        <div class="card__eyebrow">Horário</div>
+        <h3>18:00 · Preparação</h3>
+        <p>Início oficial do louvor às 18:30.</p>
+      </article>
+      <article class="card">
+        <div class="card__eyebrow">Local</div>
+        <h3>Templo Central</h3>
+        <p>Organize chegada das equipes até 30 minutos antes.</p>
+      </article>
     </section>
 
-    <section id="videos">
-      <h2>Vídeos</h2>
-      <!-- Lista de vídeos -->
+    <section aria-labelledby="equipes-title" class="section">
+      <div class="section__header">
+        <div>
+          <p class="eyebrow">Escala do culto</p>
+          <h2 id="equipes-title">Equipes confirmadas</h2>
+          <p class="section__subtitle">Funções, responsáveis e observações rápidas.</p>
+        </div>
+      </div>
+      <div class="cards-grid" id="teams"></div>
     </section>
 
-    <section id="sobre">
-      <h2>Sobre</h2>
-      <!-- Informações sobre a organização -->
+    <section aria-labelledby="ordem-title" class="section">
+      <div class="section__header">
+        <div>
+          <p class="eyebrow">Fluxo do culto</p>
+          <h2 id="ordem-title">Ordem do culto</h2>
+          <p class="section__subtitle">Itens confirmados com horários e responsáveis.</p>
+        </div>
+        <div class="section__actions">
+          <button id="copy-escala" class="ghost-button">Copiar como texto</button>
+        </div>
+      </div>
+      <ol class="timeline" id="timeline" aria-label="Linha do tempo da liturgia"></ol>
     </section>
 
-    <section id="doar">
-      <h2>Doar</h2>
-      <!-- Formulário de doação -->
+    <section aria-labelledby="novo-item-title" class="section form-section">
+      <div>
+        <p class="eyebrow">Criar ou ajustar</p>
+        <h2 id="novo-item-title">Adicionar item à liturgia</h2>
+        <p class="section__subtitle">Monte versões alternativas, insira convidados e reorganize a ordem.</p>
+      </div>
+      <form id="item-form" class="card form-card">
+        <div class="form-grid">
+          <label>
+            Horário
+            <input type="time" id="field-horario" required>
+          </label>
+          <label>
+            Título do momento
+            <input type="text" id="field-titulo" placeholder="Ex.: Louvor, Palavra Introdutória" required>
+          </label>
+          <label>
+            Responsável
+            <input type="text" id="field-responsavel" placeholder="Quem lidera">
+          </label>
+          <label>
+            Detalhes
+            <textarea id="field-detalhes" rows="2" placeholder="Orar pelas famílias, 2 cânticos..."></textarea>
+          </label>
+        </div>
+        <div class="form__actions">
+          <div class="pill-note">Os itens novos aparecem em destaque para fácil revisão.</div>
+          <button type="submit" class="primary-button">Adicionar à ordem</button>
+        </div>
+      </form>
     </section>
 
-    <section id="acessar">
-      <h2>Acessar</h2>
-      <!-- Links para acesso -->
+    <section aria-labelledby="observacoes-title" class="section section--two-columns">
+      <div>
+        <p class="eyebrow">Checklist</p>
+        <h2 id="observacoes-title">Preparação e lembretes</h2>
+        <ul class="checklist">
+          <li>Confirmar passagem de som do Conjunto até 17:40.</li>
+          <li>Publicar Stories com chamada às 16:30 (Thaís).</li>
+          <li>Equipe de recepção posicionada 30 minutos antes.</li>
+          <li>Material das crianças preparado e identificado.</li>
+          <li>Microfones higienizados para preletores.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">Observações gerais</p>
+        <div class="card notes">
+          <p>Espaço para reforçar comunicados, pedidos de oração ou mudanças de última hora.</p>
+          <ul>
+            <li>Momento de confraternização guiado pelo Pr. Rodrigo após apresentação dos visitantes.</li>
+            <li>Louvor especial com Rosilene — confirmar playback.</li>
+            <li>Recolher dízimos/ofertas: Jairo ✨ Mara.</li>
+          </ul>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Instituto Haggai Brasil</p>
+  <footer class="footer">
+    <p>Escala pronta para servir — compartilhe com a equipe.</p>
   </footer>
+
+  <script>
+    const equipes = [
+      { titulo: "Conjunto", responsavel: "Abraão e Banda", detalhes: "Medley com dois louvores iniciais.", cor: "accent" },
+      { titulo: "Mídia", responsavel: "Stories — Thaís", detalhes: "Entradas ao vivo e story de chamada às 16:30.", cor: "neutral" },
+      { titulo: "Recepção", responsavel: "Jairo ✨ Mara", detalhes: "Recolher ofertas e acolhida dos visitantes.", cor: "neutral" },
+      { titulo: "Auxiliar", responsavel: "Gian", detalhes: "Palavra introdutória e oração de transição.", cor: "accent" },
+      { titulo: "Ministração da Palavra", responsavel: "Pb. Evandro", detalhes: "Com oração de cobertura do Pb. Vanderlei.", cor: "highlight" },
+      { titulo: "Pastor Responsável", responsavel: "Pr. Rodrigo", detalhes: "Apresentação de visitantes e encerramento.", cor: "highlight" },
+    ];
+
+    const ordemInicial = [
+      { horario: "18:00", titulo: "Oração", responsavel: "Equipe de Intercessão" },
+      { horario: "18:30", titulo: "Louvor - Medley (2 louvores)", responsavel: "Conjunto" },
+      { horario: "18:40", titulo: "Palavra Introdutória e Oração", responsavel: "Aux. Gian" },
+      { horario: "18:50", titulo: "Louvor congregacional", responsavel: "Conjunto" },
+      { horario: "19:00", titulo: "Apresentação de Visitantes e Confraternização", responsavel: "Pr. Rodrigo" },
+      { horario: "19:10", titulo: "Louvor de Confraternização", responsavel: "Conjunto" },
+      { horario: "19:20", titulo: "Oração Dízimos/Ofertas", responsavel: "Dc. Erasmo" },
+      { horario: "19:30", titulo: "Louvor Especial", responsavel: "Rosilene" },
+      { horario: "19:40", titulo: "Recolher Dízimos/Ofertas", responsavel: "Jairo ✨ Mara" },
+      { horario: "19:45", titulo: "Oração Palavra e crianças", responsavel: "Pb. Vanderlei" },
+      { horario: "19:50", titulo: "Palavra", responsavel: "Pb. Evandro" },
+      { horario: "20:30", titulo: "Encerramento e bênção final", responsavel: "Pr. Rodrigo" },
+    ];
+
+    const timelineEl = document.getElementById("timeline");
+    const teamsEl = document.getElementById("teams");
+
+    function renderTeams() {
+      teamsEl.innerHTML = equipes.map(team => `
+        <article class="card card--team card--${team.cor}">
+          <div class="card__header">
+            <span class="pill">${team.titulo}</span>
+            <span class="emoji">👥</span>
+          </div>
+          <h3>${team.responsavel}</h3>
+          <p>${team.detalhes}</p>
+        </article>
+      `).join("");
+    }
+
+    function renderTimeline(lista) {
+      timelineEl.innerHTML = lista.map(item => `
+        <li class="timeline__item ${item.novo ? "timeline__item--new" : ""}">
+          <div class="timeline__time">${item.horario}</div>
+          <div class="timeline__content">
+            <div class="timeline__title">${item.titulo}</div>
+            ${item.responsavel ? `<p class="timeline__meta">${item.responsavel}</p>` : ""}
+            ${item.detalhes ? `<p class="timeline__details">${item.detalhes}</p>` : ""}
+          </div>
+        </li>
+      `).join("");
+    }
+
+    function copyEscala() {
+      const linhas = ordem.map(item => {
+        const partes = [`${item.horario} — ${item.titulo}`];
+        if (item.responsavel) partes.push(`(${item.responsavel})`);
+        if (item.detalhes) partes.push(`- ${item.detalhes}`);
+        return partes.join(" ");
+      }).join("\\n");
+
+      navigator.clipboard.writeText(`Escala 14/12/2025 - 18h\\n${linhas}`)
+        .then(() => {
+          alert("Escala copiada! Cole no WhatsApp ou e-mail da equipe.");
+        })
+        .catch(() => {
+          alert("Não foi possível copiar automaticamente. Selecione manualmente.");
+        });
+    }
+
+    const ordem = [...ordemInicial];
+    renderTeams();
+    renderTimeline(ordem);
+
+    document.getElementById("copy-escala").addEventListener("click", copyEscala);
+    document.getElementById("copy-escala-top").addEventListener("click", copyEscala);
+
+    document.getElementById("item-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const horario = document.getElementById("field-horario").value;
+      const titulo = document.getElementById("field-titulo").value;
+      const responsavel = document.getElementById("field-responsavel").value;
+      const detalhes = document.getElementById("field-detalhes").value;
+
+      if (!horario || !titulo) return;
+
+      const novoItem = { horario, titulo, responsavel, detalhes, novo: true };
+      ordem.push(novoItem);
+      ordem.sort((a, b) => a.horario.localeCompare(b.horario));
+      renderTimeline(ordem);
+      event.target.reset();
+    });
+  </script>
 </body>
 </html>
